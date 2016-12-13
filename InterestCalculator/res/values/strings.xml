@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Interest Calculator</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="principal">Principal</string>
+    <string name="rate">Rate of Interest</string>
+    <string name="numberOfYears">Number of Years</string>
+    <string name="termLength">Period (in years)</string>
+    <string name="calculateInterest">Calculate</string>
+    <string-array name="calcoptions">
+        <item >Simple Interest</item>
+        <item >Compound Interest</item>
+        <item >Mortgage P&amp;I</item>
+    </string-array>
+        <string name="amortizationSchedule">Amorization Schedule</string>
+        <string name="result">The result is: $%1$.2f</string>
+
+</resources>

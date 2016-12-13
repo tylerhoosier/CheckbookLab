@@ -35,6 +35,8 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 		btnDelete = (Button) findViewById(R.id.btnDelete);
 		btnAdd.setOnClickListener((OnClickListener) this);
 		btnDelete.setOnClickListener((OnClickListener) this);
+		// make delete button invisible at the start
+		btnDelete.setVisibility(View.INVISIBLE);
 		
 		for(int i=0; i < MAX; i++) {
 			transactions[i] = 0.0;
@@ -48,9 +50,10 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 		lstTransactions.setOnItemClickListener(this);
 	}
 
-	public static int MAX = 0;
+	public static int MAX = 25;
 	
-	private int positionToUpdate = -1;
+	private int selectedPosition = -1;
+	
 	
 	// Create an array of transactions
 	Double[] transactions = new Double[MAX];
@@ -61,17 +64,19 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 	 * Delete a transaction at position "position"
 	 * @param positionToDelete the position of the array (0 based) where I am deleting
 	 */
-	private void deleteTransaction(int positionToDelete) {
-		// We start at the positionToDelete, we don't have to go to the very last one because it
+	private void deleteTransaction(int selectedPosition) {
+		
+		// We start at the selectedPosition, we don't have to go to the very last one because it
 		// would move over when we delete the last but 1 item - so we go to numTransactions -1
-		for(int emptyPosition = positionToDelete; emptyPosition < numTransactions -1; emptyPosition++) {
+		for(int emptyPosition = selectedPosition; emptyPosition < MAX -1; emptyPosition++) {
 			// replace the item at the current emptyPosition with the one next to it
-			transactions[emptyPosition] = transactions[emptyPosition +1];
+			transactions[emptyPosition] = transactions[emptyPosition + 1];
 		}
 		// Now we have one less transaction, so lets decrement number of transactions
 		numTransactions = numTransactions -1;
 		
-		MAX--;
+		
+		
 	}
 
 	/**
@@ -79,9 +84,9 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 	 * @param positionToUpdate
 	 * @param newAmount
 	 */
-	private void updateTransaction(int positionToUpdate, double newAmount) {
+	private void updateTransaction(int selectedPosition, double newAmount) {
 		// Change transaction amount in position to new amount
-		transactions[positionToUpdate] = newAmount;
+		transactions[selectedPosition] = newAmount;
 	}
 
 	/**
@@ -114,6 +119,7 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 			numTransactions = numTransactions +1;
 			
 			
+			
 		} else {
 			System.out.println("Checkbook is full!"); // checkbook is full - print an error message
 		}
@@ -139,35 +145,52 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 	}
 
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
+		// use switch statement to control actions based on the specific button pushed
 		switch(v.getId()) {
 		case R.id.btnAdd:
 			// Add the amount to the array
 			double amount = Double.parseDouble(txtAmount.getText().toString());
 			if (btnAdd.getText().equals("Add")) {
+				// add the transaction
 				addTransaction(amount);
+				// reset text field to 0
+				txtAmount.setText(null);
 			} else {
+				// make delete button visible
+				btnDelete.setVisibility(View.VISIBLE);
 				// otherwise update transaction
-				updateTransaction(positionToUpdate, amount);
+				updateTransaction(selectedPosition, amount);
 				// reset positionToUpdate
-				positionToUpdate = -1;
+				selectedPosition = -1;
 				// switch back the text of the button
 				btnAdd.setText("Add");
+				// make delete button invisible
+				btnDelete.setVisibility(View.INVISIBLE);
+				// reset text field
+				txtAmount.setText(null);
+				// notify adapter
+				adapter.notifyDataSetChanged();
 			}
-			// let the adapter know that the dataset has been changed
-			adapter.notifyDataSetChanged();
 				// update the balance
 			tvBalance.setText("The current balance is: $" + calculateBalance());
 			break;
 		case R.id.btnDelete:
 			// delete the amount at selected position
-			deleteTransaction((int)Double.parseDouble(txtAmount.getText().toString()));
-			// let the adapter know that the dataset has been changed
-			adapter.notifyDataSetChanged();
-				// update the balance
+			deleteTransaction(selectedPosition);
+			// reset selectedPosition
+			selectedPosition = -1;
+			// switch back the text of the button
+			btnAdd.setText("Add");
+			// switch back text field to 0
+			txtAmount.setText(null);
+			// update the balance
 			tvBalance.setText("The current balance is: $" + calculateBalance());
+			// make delete button invisible
+			btnDelete.setVisibility(View.INVISIBLE);
 			break;
 		}
+			// notify the adapter to let it know data changed
+			adapter.notifyDataSetChanged();
 	}
 
 	@Override
@@ -176,7 +199,9 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 		txtAmount.setText(transactions[itemposition].toString());
 		// Change the button so the user knows the balance can be updated
 		btnAdd.setText("Update");
+		// make delete button appear
+		btnDelete.setVisibility(View.VISIBLE);
 		// Save item position to make update work
-		positionToUpdate = itemposition;
+		selectedPosition = itemposition;
 	}
 }

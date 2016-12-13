@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnDelete"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/tickit_logo" />
+
+    <EditText
+        android:id="@+id/textViewEnterTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:hint="@string/createNewTask" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/btnCreateNewTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewEnterTask"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:maxHeight="50dp"
+        android:maxWidth="110dp"
+        android:minHeight="50dp"
+        android:minWidth="110dp"
+        android:text="@string/create" />
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/btnCreateNewTask"
+        android:layout_alignBottom="@+id/btnCreateNewTask"
+        android:layout_below="@id/textViewEnterTask"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="14dp"
+        android:backgroundTint="@color/Green"
+        android:maxHeight="50dp"
+        android:maxWidth="140dp"
+        android:minHeight="50dp"
+        android:minWidth="140dp"
+        android:text="@string/complete" />
+
+    <ListView
+        android:id="@+id/lstTasks"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/btnCreateNewTask" >
+
+    </ListView>
+
+    <Button
+        android:id="@+id/btnCalendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/btnDelete"
+        android:layout_alignBottom="@+id/btnDelete"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:layout_toRightOf="@id/btnDelete"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:maxHeight="50dp"
+        android:maxWidth="110dp"
+        android:minHeight="50dp"
+        android:minWidth="110dp"
+        android:text="Calendar" />
+
+    <EditText
+        android:id="@+id/editDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/textViewEnterTask"
+        android:ems="10"
+        android:hint="Date"
+        android:inputType="date" />
+
+</RelativeLayout>

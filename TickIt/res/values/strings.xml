@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TickIt</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="newTask">Create New Task</string>
+    <string name="createdTasks">View Created Tasks</string>
+    <string name="delete">Delete</string>
+    <string name="strike">Strike</string>
+    <string name="create">Create</string>
+    <string name="createTask">New Task</string>
+    <string name="completeSelectedTasks">Complete Selected Tasks</string>
+    <string name="enterTask">Enter Task</string>
+    <string name="createNewTask">Create Task</string>
+    <string name="complete">Complete</string>
+    <string name="title_activity_calendar">CalendarActivity</string>
+    <string name="sortTask">Sort By Task Name</string>
+    <string name="sortDate">Sort By Date</string>
+
+</resources>

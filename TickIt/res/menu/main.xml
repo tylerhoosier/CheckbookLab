@@ -1,0 +1,7 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.tickit.MainActivity" >
+    <item android:id="@+id/sortTask" android:title="@string/sortTask"></item>
+    <item android:id="@+id/sortDate" android:title="@string/sortDate"></item>
+
+</menu>
